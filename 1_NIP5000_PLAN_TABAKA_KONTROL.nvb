@@ -1,24 +1,23 @@
-' Yazan     : M. Ali ÖZKAYA - Ýstanbul
 ' Tarih     : 30.09.2015
-' Açýklama  :
+' AÃ§Ä±klama  :
 '           [+] 2017
-'           [+]     NCZ'de olupda þablonda karþýlýðý olmayan tabakalarýn raporlanmasý saðlandý
+'           [+]     NCZ'de olupda ÅŸablonda karÅŸÄ±lÄ±ÄŸÄ± olmayan tabakalarÄ±n raporlanmasÄ± saÄŸlandÄ±
 '           [+] 20150101.v2
-'           [+]     Birden fazla obje tipine sahip olan tabakalardaki hatalý tasarým düzeltildi
-'           [+]     Performans artýþý için deðiþiklikler yapýldý
-'           [+]     Netcad kurulum dizininde bulunan Logs klasörüne raporlarýn oluþturulmasý saðlandý (W7'de yetkiye takýlýyordu)
-'           [+]     Arayüzdeki yazým hatalarý düzeltildi
-'           [+]     Versiyon bilgisi arayüze eklendi
-'           [+]     Ýþlem ilerlemesini gösteren loaderbar eklendi
-'           [+]     ESC tuþu ile iþlemin yarýda kesilmesi saðlandý
-'           [+]     ÞABLON dosya bilgisinin boþ geçilmesi durumunda iþlem devam edilmemesi saðlandý
-'           [+]     ÞABLON dosya var olup olmadýðý kontrol edilerek iþleme devam ediliyor
-'           [+]     CSV'deki "Metni Sütünlara Dönüþtür" oluþan hata giderildi
-'           [+]     Rapor içeriðine sýra no eklendi
+'           [+]     Birden fazla obje tipine sahip olan tabakalardaki hatalÄ± tasarÄ±m dÃ¼zeltildi
+'           [+]     Performans artÄ±ÅŸÄ± iÃ§in deÄŸiÅŸiklikler yapÄ±ldÄ±
+'           [+]     Netcad kurulum dizininde bulunan Logs klasÃ¶rÃ¼ne raporlarÄ±n oluÅŸturulmasÄ± saÄŸlandÄ± (W7'de yetkiye takÄ±lÄ±yordu)
+'           [+]     ArayÃ¼zdeki yazÄ±m hatalarÄ± dÃ¼zeltildi
+'           [+]     Versiyon bilgisi arayÃ¼ze eklendi
+'           [+]     Ä°ÅŸlem ilerlemesini gÃ¶steren loaderbar eklendi
+'           [+]     ESC tuÅŸu ile iÅŸlemin yarÄ±da kesilmesi saÄŸlandÄ±
+'           [+]     ÅžABLON dosya bilgisinin boÅŸ geÃ§ilmesi durumunda iÅŸlem devam edilmemesi saÄŸlandÄ±
+'           [+]     ÅžABLON dosya var olup olmadÄ±ÄŸÄ± kontrol edilerek iÅŸleme devam ediliyor
+'           [+]     CSV'deki "Metni SÃ¼tÃ¼nlara DÃ¶nÃ¼ÅŸtÃ¼r" oluÅŸan hata giderildi
+'           [+]     Rapor iÃ§eriÄŸine sÄ±ra no eklendi
 '           [+] 20150930.v1
-'           [+]     Karayollarý KVP için NCZ dosyalarýnýn excel þablona göre kontrol eder.
-'           [+]     Bulunamayan tabakalarý CSV olarak raporlar
-'           [+]     Tabakalardaki obje standartlarýný kontrol eder ve raporlar
+'           [+]     KarayollarÄ± KVP iÃ§in NCZ dosyalarÄ±nÄ±n excel ÅŸablona gÃ¶re kontrol eder.
+'           [+]     Bulunamayan tabakalarÄ± CSV olarak raporlar
+'           [+]     Tabakalardaki obje standartlarÄ±nÄ± kontrol eder ve raporlar
 '###############################################################################################################################
 public hedef_tabaka_adi,hedef_obje_turu,YB,nczFileName,nowDate,nc
 Const ForReading = 1, ForWriting = 2, ForAppending = 8
@@ -32,30 +31,30 @@ with Netcad
     nczFileName = DosyaAdiniDuzelt(.GetParam(PNC_CURRENTFILE))
     nowDate = Year(now) & Month(now) & Day(now)
     ' // =======================================================================================================================
-    set BD = Netcad.NewBDialog("YIGM PL Tabaka Kontrol Sihirbazý :::2017")
-    BD.PutPrompt "Ýþlem Yapýlacak Dosya : "
+    set BD = Netcad.NewBDialog("YIGM PL Tabaka Kontrol SihirbazÄ± :::2017")
+    BD.PutPrompt "Ä°ÅŸlem YapÄ±lacak Dosya : "
     BD.PutPrompt .GetParam(PNC_CURRENTFILE) & " "
     BD.PutPrompt " "
     BD.GetFileName "item7","Standart Tabaka Listesi","\\10.0.0.230\yigmgis\MAKRO\TABAKA_KONTROL\2_NIP5000_PLAN_TABAKA_KONTROL.xls","Excel Dosyalari|*.XLS|Tum Dosyalar|*.*","XLS"
-    BD.PutPrompt "  - Standart Tabaka Listesi dosyasýný deðiþtirmeyiniz! "
+    BD.PutPrompt "  - Standart Tabaka Listesi dosyasÄ±nÄ± deÄŸiÅŸtirmeyiniz! "
     BD.PutPrompt "NOT : "
-    BD.PutPrompt "  - Netigma'ya yeni bir tabaka ismi tanýmladýysanýz Standart Tabaka Listesinin"
-    BD.PutPrompt "    güncellenmesi için Netcad Portala talep açýnýz,"
-    BD.PutPrompt "  - Raporlar Netcad kurulum dizini altýndaki \Logs\ klasöründedir,"
-    BD.PutPrompt "  - Projedeki Açýk / Kapalý tüm PL tabakalarý kontrol edilir,"
+    BD.PutPrompt "  - Netigma'ya yeni bir tabaka ismi tanÄ±mladÄ±ysanÄ±z Standart Tabaka Listesinin"
+    BD.PutPrompt "    gÃ¼ncellenmesi iÃ§in Netcad Portala talep aÃ§Ä±nÄ±z,"
+    BD.PutPrompt "  - Raporlar Netcad kurulum dizini altÄ±ndaki \Logs\ klasÃ¶rÃ¼ndedir,"
+    BD.PutPrompt "  - Projedeki AÃ§Ä±k / KapalÄ± tÃ¼m PL tabakalarÄ± kontrol edilir,"
     BD.PutPrompt " "
-    BD.PutPrompt "Netcad Yazýlým A.Þ."
+    BD.PutPrompt "Netcad YazÄ±lÄ±m A.Åž."
     if BD.showmodal then
         excelFile = BD.ValueByName("item7")
         if IsNull(excelFile) or excelFile="" then
             .ClosePercent
-            msgbox "Standart Tabaka Listesi. Komutu kapatýp baþtan çalýþtýrabilirsiniz" & Chr(13) & "Devam edilmeyecek",0+16,"BÝLGÝ"
+            msgbox "Standart Tabaka Listesi. Komutu kapatÄ±p baÅŸtan Ã§alÄ±ÅŸtÄ±rabilirsiniz" & Chr(13) & "Devam edilmeyecek",0+16,"BÄ°LGÄ°"
             exit sub
         end if
         .FindWorld
     else
         .ClosePercent
-        msgbox "Ýþlemi Ýptal Ettiniz." & Chr(13) & "Devam edilmeyecek",0+16,"BÝLGÝ"
+        msgbox "Ä°ÅŸlemi Ä°ptal Ettiniz." & Chr(13) & "Devam edilmeyecek",0+16,"BÄ°LGÄ°"
         exit sub
     end if
     set BD = Nothing
@@ -63,11 +62,11 @@ with Netcad
     ' // Excel okunuyor
     ' // =======================================================================================================================
     .ClosePercent
-    .ShowPercent 0,100,0,"Standart Tabaka Listesi Açýlýyor. Lütfen Bekleyiniz..."
+    .ShowPercent 0,100,0,"Standart Tabaka Listesi AÃ§Ä±lÄ±yor. LÃ¼tfen Bekleyiniz..."
     Set objFSO = CreateObject("Scripting.FileSystemObject")
     If (objFSO.FileExists(excelFile)) Then
     else
-        msgbox "Standart Tabaka Listesi Bulunamadý.Komutu kapatýp baþtan çalýþtýrabilirsiniz." & Chr(13) & "Devam edilmeyecek",0+16,"BÝLGÝ"
+        msgbox "Standart Tabaka Listesi BulunamadÄ±.Komutu kapatÄ±p baÅŸtan Ã§alÄ±ÅŸtÄ±rabilirsiniz." & Chr(13) & "Devam edilmeyecek",0+16,"BÄ°LGÄ°"
         .ClosePercent
         exit sub
     End If
@@ -75,13 +74,13 @@ with Netcad
     Set objWorkbook = objExcel.Workbooks.Open (excelFile)
     intRow = 2
     ' // =======================================================================================================================
-    ' // NCZ'de var olan tabakanýn ÞABLON'daki karþýlýðýný kontrol et
+    ' // NCZ'de var olan tabakanÄ±n ÅžABLON'daki karÅŸÄ±lÄ±ÄŸÄ±nÄ± kontrol et
     ' // =======================================================================================================================
     Set tabakaCSV2 = objFSO.CreateTextFile(nc & "logs\PLANKONTROL_" & nowDate & "_" & nczFileName & "_UYUMSUZPLTABAKA.csv", ForWriting, True)
     satirsay = 0
     for i=1 to .NumLayers-1
         lyrName = .LayerNameOf(i)
-        .UpdatePercentX 30,lyrName & "->Uyumsuz PL Tabaka Kontrolü Yapýlýyor. Lütfen Bekleyiniz..."
+        .UpdatePercentX 30,lyrName & "->Uyumsuz PL Tabaka KontrolÃ¼ YapÄ±lÄ±yor. LÃ¼tfen Bekleyiniz..."
         intRow = 2 : durumSay = 0
         Do Until objExcel.Cells(intRow,1).Value = ""
             if objExcel.Cells(intRow,1).Value=lyrName then
@@ -92,7 +91,7 @@ with Netcad
             end if
             intRow = intRow + 1
             if .EscPressed then
-                msgbox "Ýþlemi Ýptal Ettiniz",0+16,"BÝLGÝ"
+                msgbox "Ä°ÅŸlemi Ä°ptal Ettiniz",0+16,"BÄ°LGÄ°"
                 .ClosePercent
                 .FindWorld
                 exit sub
@@ -104,22 +103,22 @@ with Netcad
        if (filesem(0) = "PL") then
 			if (durumSay>0) then
 				satirsay = satirsay + 1
-				tabakaCSV2.Write satirsay & ";" & lyrName & ";Tabakasý Standart Deðildir. Sayýsallaþtýrma menüsü ile iliþkilendirme yapabilir ya da tabakanýn ismini Netigma'dan kontrol ederek deðiþtiriniz;"
+				tabakaCSV2.Write satirsay & ";" & lyrName & ";TabakasÄ± Standart DeÄŸildir. SayÄ±sallaÅŸtÄ±rma menÃ¼sÃ¼ ile iliÅŸkilendirme yapabilir ya da tabakanÄ±n ismini Netigma'dan kontrol ederek deÄŸiÅŸtiriniz;"
 				tabakaCSV2.Writeline
 			end if
 		end if
     next
    
-    msgbox "Uyumsuz PL Tabaka kontrolü yapýldý. Þimdi PL tabakalarýndaki alan objesi dýþýndaki objelerin kontrolü yapýlacak" & Chr(13) & " Sonuç rapor : " & nc & "logs\PLANKONTROL_" & nowDate & "_" & nczFileName & "_UYMSUZ_PL_TABAKA.csv",0+64,"BÝLGÝ"
+    msgbox "Uyumsuz PL Tabaka kontrolÃ¼ yapÄ±ldÄ±. Åžimdi PL tabakalarÄ±ndaki alan objesi dÄ±ÅŸÄ±ndaki objelerin kontrolÃ¼ yapÄ±lacak" & Chr(13) & " SonuÃ§ rapor : " & nc & "logs\PLANKONTROL_" & nowDate & "_" & nczFileName & "_UYMSUZ_PL_TABAKA.csv",0+64,"BÄ°LGÄ°"
     set tabakaCSV2 = nothing
     ' // =======================================================================================================================
     ' // Tabakadaki obje tiplerini kontrol et
     ' // =======================================================================================================================
     Set objeCSV = objFSO.CreateTextFile(nc & "logs\YIGM_" & nowDate & "_" & nczFileName & "_UYUMSUZ_OBJETURLERI.csv", ForWriting, True)
-    .UpdatePercentX 40,"PL Tabakalarýndaki Alan Dýþý Objelerin Kontrolü Ýçin CSV Oluþturuluyor. Lütfen Bekleyiniz..."
+    .UpdatePercentX 40,"PL TabakalarÄ±ndaki Alan DÄ±ÅŸÄ± Objelerin KontrolÃ¼ Ä°Ã§in CSV OluÅŸturuluyor. LÃ¼tfen Bekleyiniz..."
     intRow = 2 : satirsay = 0
     Do Until objExcel.Cells(intRow,1).Value = ""
-        .UpdatePercentX 75,objExcel.Cells(intRow,1).Value & "->TABAKA Ýçin OBJE Tipi Kontrolü. Lütfen Bekleyiniz..."
+        .UpdatePercentX 75,objExcel.Cells(intRow,1).Value & "->TABAKA Ä°Ã§in OBJE Tipi KontrolÃ¼. LÃ¼tfen Bekleyiniz..."
         if .FoundLayer(objExcel.Cells(intRow,1).Value)<>-1 and objExcel.Cells(intRow,2).Value<>"" then ' // Tabaka var ise objeleri kontrol et
             count = 0
             set objAra = .newobject()
@@ -142,7 +141,7 @@ with Netcad
                 next
                 if (objeSay>0) then count = count + 1
                 if .EscPressed then
-                    msgbox "Ýþlemi Ýptal Ettiniz",0+16,"BÝLGÝ"
+                    msgbox "Ä°ÅŸlemi Ä°ptal Ettiniz",0+16,"BÄ°LGÄ°"
                     .ClosePercent
                     .FindWorld
                     exit sub
@@ -158,13 +157,13 @@ with Netcad
         end if
         intRow = intRow + 1
     Loop
-   .UpdatePercentX 90,"PL Tabakalarýndaki Alan Dýþý Objelerin Kontrolü Tamamlandý. Lütfen Bekleyiniz..."
-    msgbox "PL Tabakalarýndaki Alan Dýþý Objelerin Kontrolü Yapýldý" & Chr(13) & " Sonuç rapor : " & nc & "logs\YIGM_" & nowDate & "_" & nczFileName & "_UYUMSUZ_OBJETURLERI.csv",0+64,"BÝLGÝ"
+   .UpdatePercentX 90,"PL TabakalarÄ±ndaki Alan DÄ±ÅŸÄ± Objelerin KontrolÃ¼ TamamlandÄ±. LÃ¼tfen Bekleyiniz..."
+    msgbox "PL TabakalarÄ±ndaki Alan DÄ±ÅŸÄ± Objelerin KontrolÃ¼ YapÄ±ldÄ±" & Chr(13) & " SonuÃ§ rapor : " & nc & "logs\YIGM_" & nowDate & "_" & nczFileName & "_UYUMSUZ_OBJETURLERI.csv",0+64,"BÄ°LGÄ°"
     set objeCSV = nothing
     objExcel.Quit
     ' // =======================================================================================================================
-   .UpdatePercentX 100,"Ýþlem Tamamlandý. Lütfen Bekleyiniz..."
-    msgbox "Ýþlem Tamamlandý. Rapor Dosyalarýna Netcad Kurulum Dosyasý Altýndaki Logs Klasöründen Ulaþabilirsiniz. Ayný Plan Ýçin Tekrar Kontrol Ýþlemini Çalýþtýracaksanýz Oluþan Rapor Dosyalarýnýn Kapalý Olmasýna Dikkat Ediniz ",0+64,"BÝLGÝ"
+   .UpdatePercentX 100,"Ä°ÅŸlem TamamlandÄ±. LÃ¼tfen Bekleyiniz..."
+    msgbox "Ä°ÅŸlem TamamlandÄ±. Rapor DosyalarÄ±na Netcad Kurulum DosyasÄ± AltÄ±ndaki Logs KlasÃ¶rÃ¼nden UlaÅŸabilirsiniz. AynÄ± Plan Ä°Ã§in Tekrar Kontrol Ä°ÅŸlemini Ã‡alÄ±ÅŸtÄ±racaksanÄ±z OluÅŸan Rapor DosyalarÄ±nÄ±n KapalÄ± OlmasÄ±na Dikkat Ediniz ",0+64,"BÄ°LGÄ°"
     .ClosePercent
     .FindWorld
     ' // =======================================================================================================================
@@ -183,7 +182,7 @@ dim i,fileNameArr,trDuzelt,chrDuzelt
     DosyaAdiniDuzelt = RTrim(DosyaAdiniDuzelt)
     DosyaAdiniDuzelt = Trim(DosyaAdiniDuzelt)
 
-    trDuzelt = array ("Ç","C","Ö","O","Þ","S","Ð","G","Ü","U","Ý","I","ç","C","ö","O","þ","S","ð","G","ü","U","i","I")
+    trDuzelt = array ("Ã‡","C","Ã–","O","Åž","S","Äž","G","Ãœ","U","Ä°","I","Ã§","C","Ã¶","O","ÅŸ","S","ÄŸ","G","Ã¼","U","i","I")
     for i = 0 to UBound(trDuzelt)-1 step 2
         DosyaAdiniDuzelt = Replace(DosyaAdiniDuzelt,trDuzelt(i),trDuzelt(i+1))
     next
